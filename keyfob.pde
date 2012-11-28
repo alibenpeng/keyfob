@@ -85,7 +85,7 @@ void garageSend() {
 	}
 
   wdt_enable(WDTO_15MS);
-	Sleepy::powerDown();        // sleep 15ms and get reset by the watchdog
+  while(1) {};
 }
 
 
@@ -97,8 +97,6 @@ void cryptSend(int button) {
 		rf12_sendStart(0, &payload, sizeof(payload));
 		rf12_sendWait(1);
 	}
-  wdt_enable(WDTO_15MS);
-	Sleepy::powerDown();        // sleep 15ms and get reset by the watchdog
 }
 
 
@@ -122,8 +120,6 @@ void processButton() {
 }
 
 void setup() {
-  cli();
-  wdt_reset();
   MCUSR = 0; // this is oh so important! It sets the MCU status register to 0, so the MCU doesn't keep rebooting itself!
   wdt_disable();
 
